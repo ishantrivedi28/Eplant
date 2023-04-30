@@ -9,6 +9,7 @@ class AddToCartController extends GetxController {
 
   cartfunction(Product item, String itemId) {
     if (addedItemsId.value.contains(itemId)) {
+      print('inside remove');
       removeFromCart(item, itemId);
     } else {
       addToCart(item, itemId);
@@ -24,8 +25,18 @@ class AddToCartController extends GetxController {
   }
 
   removeFromCart(Product item, String itemId) {
+    int index = 0;
+    for (var x in addedItems.value) {
+      if (x.productId == itemId) {
+        print('inside if, index value is');
+        print(index);
+        break;
+      }
+      index++;
+    }
     addedItemsId.value.remove(itemId);
-    addedItems.value.remove(item);
+
+    addedItems.value.removeAt(index);
     itemCount.value--;
   }
 }

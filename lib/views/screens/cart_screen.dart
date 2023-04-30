@@ -17,14 +17,12 @@ class CartScreen extends StatelessWidget {
             style: TextStyle(color: blackColor),
           ),
         ),
-        body: Obx(
-          () => ListView.builder(
-            itemCount: AddToCartController.instance.itemCount.value,
+        body: GetBuilder<AddToCartController>(
+          builder: (controller) => ListView.builder(
+            itemCount: AddToCartController.instance.addedItemsId.value.length,
             itemBuilder: (context, index) {
-              Product items =
-                  AddToCartController.instance.addedItems.value[index];
-              String itemId =
-                  AddToCartController.instance.addedItemsId.value[index];
+              Product items = controller.addedItems.value[index];
+              String itemId = controller.addedItemsId.value[index];
               return customCard(context, itemId, items);
             },
           ),
